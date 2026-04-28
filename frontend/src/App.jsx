@@ -6,7 +6,7 @@
 //   3. Report screen (report ready)
 //   4. Error screen (something went wrong)
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import LoadingSteps from './components/LoadingSteps.jsx'
 import ReportViewer from './components/ReportViewer.jsx'
 
@@ -32,6 +32,11 @@ export default function App() {
 
   // error: error message if something goes wrong
   const [error, setError] = useState('')
+
+  useEffect(() => {
+  const apiBase = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+  fetch(`${apiBase}/health`).catch(() => {})
+}, [])
 
 
   // ── handleSearch: called when user clicks Generate Report ─────────────
